@@ -4,4 +4,4 @@ project(advent)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(advent 02/main.cpp)
+add_executable(advent 03/main.cpp)  
