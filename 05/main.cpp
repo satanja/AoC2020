@@ -7,23 +7,22 @@
 int main(int arg, char* argv[])
 {
     std::ifstream file { std::string(argv[1]) };
-    
-
     std::string str;
-    int max_id = -1;
     std::vector<int> seats;
     while (getline(file, str))
     {
         int k = 0;
         // row
-        for (int i = 0; i < str.size() - 3; i++)
+        for (int i = 0; i < 7; i++)
         {
-            k |= ((str.at(i) != 'F') << (9 - i));
+            k *= 2;
+            k += str.at(i) == 'B';
         }
         // column 
-        for (int i = str.size() - 3; i < str.size(); i++)
+        for (int i = str.size() - 3; i < 10; i++)
         {
-            k |= ((str.at(i) != 'L') << (9 - i));
+            k *= 2;
+            k += str.at(i) == 'R';
         }
         // todo compute k
         seats.push_back(k);
