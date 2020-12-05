@@ -14,44 +14,18 @@ int main(int arg, char* argv[])
     std::vector<int> seats;
     while (getline(file, str))
     {
-        int k = -1;
-        int min_r = 0;
-        int max_r = 127;
-        int min_c = 0;
-        int max_c = 7;
-        int r = 1;
-        int c = 1;
-
+        int k = 0;
         // row
         for (int i = 0; i < str.size() - 3; i++)
         {
-            if (str.at(i) == 'F')
-            {
-                max_r = (min_r + max_r) / 2;
-            }
-            else
-            {
-                min_r = (min_r + max_r) / 2 + 1;
-            }
+            k |= ((str.at(i) != 'F') << (9 - i));
         }
-        r = max_r;
-
         // column 
         for (int i = str.size() - 3; i < str.size(); i++)
         {
-            if (str.at(i) == 'L')
-            {
-                max_c = (min_c + max_c) / 2;
-            }
-            else
-            {
-                min_c = (min_c + max_c) / 2 + 1;
-            }
+            k |= ((str.at(i) != 'L') << (9 - i));
         }
-        c = min_c;
-
         // todo compute k
-        k = r * 8 + c;
         seats.push_back(k);
     }
     sort(seats.begin(), seats.end());
