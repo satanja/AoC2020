@@ -52,10 +52,6 @@ int main(int arg, char* argv[])
 
         // todo compute k
         k = r * 8 + c;
-        if (k > max_id)
-        {
-            max_id = k;
-        }
         seats.push_back(k);
     }
     sort(seats.begin(), seats.end());
@@ -68,6 +64,6 @@ int main(int arg, char* argv[])
             break;
         }
     }
-    std::cout << max_id << "\n";
+    std::cout << seats[seats.size() - 1] << "\n";
     std::cout << my_seat << "\n";
 }
