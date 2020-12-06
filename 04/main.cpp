@@ -43,7 +43,7 @@ struct passport
                 int l = std::stoi(hgt.substr(0, hgt.size() - 2));
                 valid_hgt = (150 <= l && l <= 193);
             }
-            else if (hgt.substr(hgt.size() - 2, 2) == "in")
+            else if (hgt.substr(hgt.size() - 2) == "in")
             {
                 int l = std::stoi(hgt.substr(0, hgt.size() - 2));
                 valid_hgt = (59 <= l && l <= 76);
@@ -59,6 +59,7 @@ struct passport
 
         bool valid_ecl = (ecl == "amb" ||
                           ecl == "blu" ||
+                          ecl == "brn" ||
                           ecl == "gry" ||
                           ecl == "grn" ||
                           ecl == "hzl" ||
@@ -99,17 +100,9 @@ int main(int arg, char *argv[])
     while (getline(file, line))
     {
         if (line == "")
-        {
+        {   
             p1 += p.is_complete();
-            p2 += p.is_valid();
-            if (p.is_valid())
-            {
-                std::cout << "true\n";
-            }
-            else 
-            {
-                std::cout << "false\n";
-            }
+            p2 += p.is_valid() && p.is_complete();
             p.clear();
         }
         else
