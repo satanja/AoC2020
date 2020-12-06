@@ -1,18 +1,26 @@
 #include <iostream>
+#include <sstream>
+#include <string>
 #include <unordered_set>
-int main()
-{
+#include <vector>
+
+#include "stefan.h"
+
+void aoc01(const char *arr, int len, unsigned char **output) {
+    std::string in(arr, arr + len);
+    std::istringstream cin(in);
+    std::ostringstream cout((char*) *output);
     int x;
     std::unordered_set<int> X;
     const int target = 2020;
-    goto part2;
+    // goto part2;
 part1:
-    while (std::cin >> x)
+    while (cin >> x)
     {
         if (X.contains(2020 - x))
         {
-           std::cout << (2020 - x) * x << "\n";
-           return 0;
+            cout << (2020 - x) * x << " ";
+            goto part2;
         }
         else 
         {
@@ -20,9 +28,9 @@ part1:
         }
     }
 part2:
-
+    cin.seekg(0);
     std::vector<int> Y;
-    while (std::cin >> x)
+    while (cin >> x)
     {
         for (int i = 0; i < Y.size(); i++)
         {
@@ -30,8 +38,8 @@ part2:
             {
                 if (x + Y[i] + Y[j] == 2020)
                 {
-                    std::cout << x * Y[i] * Y[j] << "\n";
-                    return 0;
+                    cout << x * Y[i] * Y[j] << "\n";
+                    return;
                 }
             }
         }
