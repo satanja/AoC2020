@@ -12,5 +12,5 @@ set(SOURCES
     01/main.cpp
 )
 
-# add_library(stefan STATIC ${SOURCES})
-
+add_library(stefan STATIC ${SOURCES})
+install(TARGETS stefan DESTINATION ${CMAKE_INSTALL_PREFIX})
