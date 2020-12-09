@@ -4,7 +4,13 @@ project(advent)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(advent 06/main.cpp)  
+add_executable(advent 09/main.cpp)  
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-add_library(stefan STATIC 01/main.cpp)
+
+set(SOURCES 
+    01/main.cpp
+)
+
+# add_library(stefan STATIC ${SOURCES})
+
