@@ -61,21 +61,21 @@ int main(int arg, char* argv[])
 
     for (int i = 0; i < index; i++)
     {
-        std::vector<unsigned long long> candidates;
         unsigned long long sum = 0;
         int j = i;
+        unsigned long long min = list[j];
+        unsigned long long max = list[j];
         while (sum < p1)
         {
-            candidates.push_back(list[j]);
+            min = std::min(list[j], min);
+            max = std::max(list[j], max);
             sum += list[j];
             j++;
         }
 
         if (sum == p1)
         {
-            sort(candidates.begin(), candidates.end());
-            p2 = candidates[0] + candidates[candidates.size() - 1];
-            break;
+            p2 = min + max;
         }
     }
 
