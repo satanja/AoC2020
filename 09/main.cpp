@@ -3,15 +3,15 @@
 #include <iostream>
 #include <string>
 #include <unordered_set>
-#include <deque>
 #include <vector>
 #include <algorithm>
+#include <array>
 
 int main(int arg, char* argv[])
 {
     std::ifstream file { std::string(argv[1]) };
 
-    std::deque<unsigned long long> queue;
+    std::array<unsigned long long, 25> queue;
     std::unordered_set<unsigned long long> hist;
     std::vector<unsigned long long> list;
     // reading input
@@ -21,13 +21,15 @@ int main(int arg, char* argv[])
     int pre = 0;
     unsigned long long p1 = 0;
     int index = 0;
+    int head = 0;
+    int tail = 0;
     while (getline(file, line))
     {
         unsigned long long num = std::stoull(line);
         if (pre < 25)
         {
             hist.insert(num);
-            queue.push_back(num);
+            queue[pre] = num;
             pre++;
         }
         else 
@@ -35,16 +37,20 @@ int main(int arg, char* argv[])
             bool okay = false;
             for (auto const x : queue)
             {
-                okay |= hist.contains(num - x);
+                if (hist.contains(num - x))
+                {
+                    okay = true;
+                    break;
+                }
             }
             if (okay)
             {
-                unsigned long long front = queue.front();
+                unsigned long long front = queue[head];
                 hist.erase(front);
-                queue.pop_front();
-
                 hist.insert(num);
-                queue.push_back(num);
+                tail = head;
+                head = (head + 1) % queue.size();
+                queue[tail] = num;
             }
             else 
             {
