@@ -9,7 +9,7 @@ void aoc03(const char *arr, int len, unsigned char **out)
 {
     std::string in(arr, arr + len);
     std::istringstream file(in);
-    std::ostringstream cout((char*) *output);
+    std::ostringstream cout((char*) *out);
     int w;
     std::string str;
     std::vector<std::vector<int>> map;

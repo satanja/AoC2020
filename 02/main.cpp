@@ -4,10 +4,10 @@
 
 #include "stefan.h"
 
-void aoc02(const char *arr, int len, unsigned char **output) {
+void aoc02(const char *arr, int len, unsigned char **out) {
     std::string in(arr, arr + len);
     std::istringstream cin(in);
-    std::ostringstream cout((char*) *output);
+    std::ostringstream cout((char*) *out);
 
     int min = -1;
     int max = -1;

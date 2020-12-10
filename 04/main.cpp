@@ -95,8 +95,7 @@ void aoc04(const char *arr, int len, unsigned char **out)
 {
     std::string in(arr, arr + len);
     std::istringstream file(in);
-    std::ostringstream cout((char*) *output);
-    std::ifstream file{std::string(argv[1])};
+    std::ostringstream cout((char*) *out);
 
     std::string line;
     

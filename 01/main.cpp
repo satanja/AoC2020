@@ -6,10 +6,10 @@
 
 #include "stefan.h"
 
-void aoc01(const char *arr, int len, unsigned char **output) {
+void aoc01(const char *arr, int len, unsigned char **out) {
     std::string in(arr, arr + len);
     std::istringstream cin(in);
-    std::ostringstream cout((char*) *output);
+    std::ostringstream cout((char*) *out);
     int x;
     std::unordered_set<int> X;
     const int target = 2020;
