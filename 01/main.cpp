@@ -31,7 +31,7 @@ public:
 
     void push_back(int val)
     {
-        if (size() == arr.size()) continue;
+        if (size() == arr.size()) return;
         arr[head] = val;
         head++;
     }
