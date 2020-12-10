@@ -3,10 +3,15 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <sstream>
+#include "stefan.h"
 
-int main(int arg, char* argv[])
+void aoc05(const char *arr, int len, unsigned char **out)
 {
-    std::ifstream file { std::string(argv[1]) };
+    std::string in(arr, arr + len);
+    std::istringstream file(in);
+    std::ostringstream cout((char*) *out);
+
     std::string str;
     std::vector<int> seats;
     while (getline(file, str))
@@ -19,7 +24,7 @@ int main(int arg, char* argv[])
             k += str.at(i) == 'B';
         }
         // column 
-        for (int i = str.size() - 3; i < 10; i++)
+        for (int i = 7; i < 10; i++)
         {
             k *= 2;
             k += str.at(i) == 'R';
