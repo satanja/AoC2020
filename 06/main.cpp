@@ -59,6 +59,6 @@ void aoc06(const char *arr, int len, unsigned char **out)
             count2++;
         }
     }
-    std::cout << count1 << "\n";
-    std::cout << count2 << "\n";
+    cout << count1 << "\n";
+    cout << count2 << "\n";
 }

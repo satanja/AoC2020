@@ -87,6 +87,6 @@ void aoc09(const char *arr, int len, unsigned char **out)
         }
     }
 
-    std::cout << p1 << "\n";
-    std::cout << p2 << "\n";
+    cout << p1 << "\n";
+    cout << p2 << "\n";
 }  

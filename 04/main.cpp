@@ -155,6 +155,6 @@ void aoc04(const char *arr, int len, unsigned char **out)
     p1 += p.is_complete();
     p2 += p.is_valid();
 
-    std::cout << p1 << "\n";
-    std::cout << p2 << "\n";
+    cout << p1 << "\n";
+    cout << p2 << "\n";
 }

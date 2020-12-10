@@ -52,8 +52,7 @@ void aoc03(const char *arr, int len, unsigned char **out)
             x += dx;
             y += dy;
         }
-        std::cout << count << "\n";
         prod *= count;
     }
-    std::cout << prod << "\n";
+    cout << prod << "\n";
 }

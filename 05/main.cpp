@@ -42,6 +42,6 @@ void aoc05(const char *arr, int len, unsigned char **out)
             break;
         }
     }
-    std::cout << seats[seats.size() - 1] << "\n";
-    std::cout << my_seat << "\n";
+    cout << seats[seats.size() - 1] << "\n";
+    cout << my_seat << "\n";
 }

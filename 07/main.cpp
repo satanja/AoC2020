@@ -133,6 +133,6 @@ void aoc07(const char *arr, int len, unsigned char **out)
         }
     }
 
-    std::cout << p1 << "\n";
-    std::cout << recursive(0, adj_reverse) << "\n";
+    cout << p1 << "\n";
+    cout << recursive(0, adj_reverse) << "\n";
 }
