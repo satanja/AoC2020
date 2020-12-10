@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
+#include "stefan.h"
 
 struct instruction
 {
@@ -11,9 +13,12 @@ struct instruction
     int count = 0;
 };
 
-int main(int arg, char* argv[])
+void aoc06(const char *arr, int len, unsigned char **out)
 {
-    std::ifstream file { std::string(argv[1]) };
+    std::string in(arr, arr + len);
+    std::istringstream file(in);
+    std::ostringstream cout((char*) *out);
+    std::string line;
 
     std::vector<instruction> instructions;
     std::vector<int> jmps;
@@ -22,7 +27,6 @@ int main(int arg, char* argv[])
     int64_t accumulator = 0;
     int64_t p1 = 0;
     int64_t ptr = 0;
-    std::string line;
     
     while (getline(file, line))
     {
