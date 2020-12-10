@@ -1,12 +1,20 @@
 #include <iostream>
 #include <string>
-int main()
-{
+#include <sstream>
+
+#include "stefan.h"
+
+void aoc02(const char *arr, int len, unsigned char **output) {
+    std::string in(arr, arr + len);
+    std::istringstream cin(in);
+    std::ostringstream cout((char*) *output);
+
     int min = -1;
     int max = -1;
     char k;
     int count = 0;
-    int correct = 0;
+    int correct1 = 0;
+    int correct2 = 0;
 
     bool read_range = false;
     bool first = true;
@@ -14,7 +22,7 @@ int main()
     bool is_character = false;
     bool is_string = false;
     std::string line;
-    while (getline(std::cin, line))
+    while (getline(cin, line))
     {
         int num = 0;
         int pos = 1;
@@ -66,9 +74,13 @@ int main()
                 pos++;
             }
         }
+        if (min <= count && count <= max)
+        {
+            correct1++;
+        }
         if (/*min <= count && count <= max */ a ^ b)
         {
-            correct++;
+            correct2++;
         }
         // reset
         count = 0;
@@ -78,5 +90,6 @@ int main()
         is_character = false;
         is_string = false;
     }
-    std::cout << correct << "\n";
+    // cout << correct1 << "\n";
+    // cout << correct2 << "\n";
 }

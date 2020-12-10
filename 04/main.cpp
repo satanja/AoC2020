@@ -6,6 +6,9 @@
 #include <string>
 #include <regex>
 
+#include <sstream>
+#include "stefan.h"
+
 struct passport
 {
     int byr = 0;
@@ -88,8 +91,11 @@ struct passport
     }
 };
 
-int main(int arg, char *argv[])
+void aoc04(const char *arr, int len, unsigned char **out)
 {
+    std::string in(arr, arr + len);
+    std::istringstream file(in);
+    std::ostringstream cout((char*) *output);
     std::ifstream file{std::string(argv[1])};
 
     std::string line;

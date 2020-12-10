@@ -2,10 +2,14 @@
 #include <fstream>
 #include <string>
 #include <vector>
-int main(int arg, char* argv[]) 
-{
-    std::ifstream file { std::string(argv[1]) };
+#include <sstream>
+#include "stefan.h"
 
+void aoc03(const char *arr, int len, unsigned char **out)
+{
+    std::string in(arr, arr + len);
+    std::istringstream file(in);
+    std::ostringstream cout((char*) *output);
     int w;
     std::string str;
     std::vector<std::vector<int>> map;

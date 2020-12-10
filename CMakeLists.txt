@@ -10,6 +10,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(SOURCES 
     01/main.cpp
+    02/main.cpp
+    03/main.cpp
+    04/main.cpp
 )
 
 add_library(stefan STATIC ${SOURCES})
