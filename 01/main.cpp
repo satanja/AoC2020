@@ -13,8 +13,6 @@ void aoc01(const char *arr, int len, unsigned char **out) {
     int x;
     std::unordered_set<int> X;
     const int target = 2020;
-    // goto part2;
-part1:
     while (cin >> x)
     {
         if (X.contains(2020 - x))

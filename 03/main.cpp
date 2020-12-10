@@ -15,7 +15,7 @@ void aoc03(const char *arr, int len, unsigned char **out)
     std::vector<std::vector<int>> map;
     while (getline(file, str))
     {   
-        w = str.size();
+        w = (int) str.size();
         std::vector<int> scan(str.size(), 0);
         int j = 0;
         for (auto const& c : str)
