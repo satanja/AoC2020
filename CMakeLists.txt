@@ -17,6 +17,7 @@ set(SOURCES
     06/main.cpp
     07/main.cpp
     08/main.cpp
+    09/main.cpp
 )
 
 add_library(stefan STATIC ${SOURCES})

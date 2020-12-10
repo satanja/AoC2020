@@ -6,17 +6,19 @@
 #include <vector>
 #include <algorithm>
 #include <array>
+#include "stefan.h"
 
-int main(int arg, char* argv[])
+void aoc09(const char *arr, int len, unsigned char **out)
 {
-    std::ifstream file { std::string(argv[1]) };
+    std::string in(arr, arr + len);
+    std::istringstream file(in);
+    std::ostringstream cout((char*) *out);
+    std::string line;
 
     std::array<unsigned long long, 25> queue;
     std::unordered_set<unsigned long long> hist;
     std::vector<unsigned long long> list;
     // reading input
-    
-    std::string line;
 
     int pre = 0;
     unsigned long long p1 = 0;

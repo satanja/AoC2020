@@ -13,6 +13,7 @@ void aoc05(const char *arr, int len, unsigned char **out);
 void aoc06(const char *arr, int len, unsigned char **out);
 void aoc07(const char *arr, int len, unsigned char **out);
 void aoc08(const char *arr, int len, unsigned char **out);
+void aoc09(const char *arr, int len, unsigned char **out);
 
 #ifdef __cplusplus
 }
