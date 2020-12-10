@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include <vector>
 #include <queue>
+#include <sstream>
+#include "stefan.h"
 
 struct edge
 {
@@ -29,10 +31,12 @@ int recursive(int start, const std::vector<std::vector<edge>>& adj)
     return bags;
 }
 
-int main(int arg, char* argv[])
+void aoc07(const char *arr, int len, unsigned char **out)
 {
-    std::ifstream file { std::string(argv[1]) };
-
+    std::string in(arr, arr + len);
+    std::istringstream file(in);
+    std::ostringstream cout((char*) *out);
+    std::string line;
 
     std::vector<std::vector<edge>> adj;
     std::vector<std::vector<edge>> adj_reverse;
@@ -43,8 +47,6 @@ int main(int arg, char* argv[])
 
     int current_id = 1;
 
-    
-    std::string line;
     while (getline(file, line))
     {
         std::stringstream ss(line);
