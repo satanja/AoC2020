@@ -64,10 +64,12 @@ part2:
     while (cin >> x)
     {
         for (int i = 0; i < Y.size(); i++)
-        {
+        {   
+            if (2020 - x - Y[i] <= 0) continue;
             if (X[2020 - x - Y[i]])
             {
-                cout << x * Y[i] * (2020 - x - Y[i]) << "\n";
+                std::cout << x * Y[i] * (2020 - x - Y[i]) << "\n";
+                return;
             }
         }
         Y.push_back(x);
