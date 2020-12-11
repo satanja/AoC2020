@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <utility>
+#include "stefan.h"
 
 int occupied(int x, int y, const std::array<std::array<char, 100>, 100>& state)
 {
@@ -210,13 +211,8 @@ int visible_occupied(
     return occ;
 }
 
-#define GRID 100
-
-int main(int arg, char* argv[])
-{   
-    auto begin = std::chrono::high_resolution_clock::now();
-    std::ifstream file { std::string(argv[1]) };
-
+void aoc11(const char *arr, int len, unsigned char **out)
+{
     // 0 == floor
     // 1 == empty seat
     // 2 == occupied seat
@@ -226,15 +222,20 @@ int main(int arg, char* argv[])
     std::string line;
 
     int y = 1;
-    while (getline(file, line))
+    int x = 1;
+    for (int i = 0; i < len; i++)
     {
-        for (int i = 0; i < line.size(); i++)
+        if (arr[i] != '\n')
         {
-            original[y][i + 1] = line.at(i) == 'L';
+            original[y][x] = arr[i] == 'L';
+            x++;
         }
-        y++;
-    }    
-    
+        else 
+        {
+            x = 1;
+            y++;
+        }
+    }
 
     adj = std::array<std::array<char, 100>, 100>(original);
     bool changed = true;
@@ -321,7 +322,6 @@ int main(int arg, char* argv[])
         }
     }
 
-
     for (int y = 1; y < adj.size() - 1; y++)
     {
         for (int x = 1; x < adj[y].size() - 1; x++)
@@ -329,8 +329,4 @@ int main(int arg, char* argv[])
             p2 += adj[y][x] == 2;
         }
     }
-
-    std::cout << p1 << "\n";
-    std::cout << p2 << "\n";
-    std::cout << duration.count() << "\n";
 }  
