@@ -2,11 +2,8 @@
 #include <sstream>
 #include <iostream>
 #include <string>
-#include <unordered_set>
 #include <vector>
-#include <algorithm>
-#include <array>
-#include <queue>
+#include <utility>
 
 int occupied(int x, int y, const std::vector<std::vector<char>>& state)
 {
