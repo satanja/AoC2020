@@ -2,10 +2,9 @@
 #include <sstream>
 #include <iostream>
 #include <string>
-#include <vector>
 #include <utility>
 
-int occupied(int x, int y, const std::vector<std::vector<char>>& state)
+int occupied(int x, int y, const std::array<std::array<char, 100>, 100>& state)
 {
     int occ = 0;
     occ += state[y][x - 1] == 2;
@@ -33,17 +32,18 @@ struct visibles
 };
 
 void compute_visibility(
-    const std::vector<std::vector<char>>& state, 
-    std::vector<std::vector<visibles>>& visibility)
+    const std::array<std::array<char, 100>, 100>& state, 
+    std::array<std::array<visibles, 100>, 100>& visibility)
 {
     for (int y = 1; y < state.size() - 1; y++)
     {
         for (int x = 1; x < state[y].size() - 1; x++)
         {
+            if (state[y][x] == '.') continue;
             int y1 = y;
             int x1 = x;
             bool first = true;
-            for (int k = 0; 0 <= y1 && y1 < state.size() && 0 <= x1 && x1 < state[y1].size(); k++)
+            for (int k = 0; 0 <= y1 && y1 < state.size(); k++)
             {
                 visibility[y][x].s1.first = y1;
                 visibility[y][x].s1.second = x1;
@@ -58,7 +58,7 @@ void compute_visibility(
             y1 = y;
             x1 = x;
             first = true;
-            for (int k = 0; 0 <= y1 && y1 < state.size() && 0 <= x1 && x1 < state[y1].size(); k++)
+            for (int k = 0; 0 <= y1 && y1 < state.size(); k++)
             {
                 visibility[y][x].s2.first = y1;
                 visibility[y][x].s2.second = x1;
@@ -73,7 +73,7 @@ void compute_visibility(
             y1 = y;
             x1 = x;
             first = true;
-            for (int k = 0; 0 <= y1 && y1 < state.size() && 0 <= x1 && x1 < state[y1].size(); k++)
+            for (int k = 0; 0 <= x1 && x1 < state[y1].size(); k++)
             {
                 visibility[y][x].s3.first = y1;
                 visibility[y][x].s3.second = x1;
@@ -88,7 +88,7 @@ void compute_visibility(
             y1 = y;
             x1 = x;
             first = true;
-            for (int k = 0; 0 <= y1 && y1 < state.size() && 0 <= x1 && x1 < state[y1].size(); k++)
+            for (int k = 0; 0 <= x1 && x1 < state[y1].size(); k++)
             {
                 visibility[y][x].s4.first = y1;
                 visibility[y][x].s4.second = x1;
@@ -170,8 +170,8 @@ void compute_visibility(
 int visible_occupied(
     int x,
     int y,
-    const std::vector<std::vector<char>>& state,
-    const std::vector<std::vector<visibles>>& visibility)
+    const std::array<std::array<char, 100>, 100>& state,
+    const std::array<std::array<visibles, 100>, 100>& visibility)
 {
     int occ = 0;
 
@@ -213,15 +213,16 @@ int visible_occupied(
 #define GRID 100
 
 int main(int arg, char* argv[])
-{
+{   
+    auto begin = std::chrono::high_resolution_clock::now();
     std::ifstream file { std::string(argv[1]) };
 
     // 0 == floor
     // 1 == empty seat
     // 2 == occupied seat
-    std::vector<std::vector<char>> original(GRID, std::vector<char>(GRID, 0));
-    std::vector<std::vector<char>> adj(GRID, std::vector<char>(GRID, 0));
-    std::vector<std::vector<visibles>> visibility(GRID, std::vector<visibles>(GRID));
+    std::array<std::array<char, 100>, 100> original;
+    std::array<std::array<char, 100>, 100> adj;
+    std::array<std::array<visibles, 100>, 100> visibility;
     std::string line;
 
     int y = 1;
@@ -235,13 +236,13 @@ int main(int arg, char* argv[])
     }    
     
 
-    adj = std::vector<std::vector<char>>(original);
+    adj = std::array<std::array<char, 100>, 100>(original);
     bool changed = true;
     int p1 = 0;
     while (changed)
     {
         changed = false;
-        std::vector<std::vector<char>> adj_new(adj);
+        std::array<std::array<char, 100>, 100> adj_new(adj);
         for (int y = 1; y < adj.size() - 1; y++)
         {
             for (int x = 1; x < adj[y].size() - 1; x++)
@@ -281,14 +282,14 @@ int main(int arg, char* argv[])
         }
     }
 
-    adj = std::vector<std::vector<char>>(original);
+    adj = std::array<std::array<char, 100>, 100>(original);
     compute_visibility(adj, visibility);
     changed = true;
     int p2 = 0;
     while (changed)
     {
         changed = false;
-        std::vector<std::vector<char>> adj_new(adj);
+        std::array<std::array<char, 100>, 100> adj_new(adj);
         for (int y = 1; y < adj.size() - 1; y++)
         {
             for (int x = 1; x < adj[y].size() - 1; x++)
@@ -331,4 +332,5 @@ int main(int arg, char* argv[])
 
     std::cout << p1 << "\n";
     std::cout << p2 << "\n";
+    std::cout << duration.count() << "\n";
 }  
