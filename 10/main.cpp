@@ -7,16 +7,19 @@
 #include <algorithm>
 #include <array>
 #include <queue>
+#include "stefan.h"
 
-int main(int arg, char* argv[])
+void aoc10(const char *arr, int len, unsigned char **out)
 {
-    std::ifstream file { std::string(argv[1]) };
+    std::string in(arr, arr + len);
+    std::istringstream file(in);
+    std::ostringstream cout((char*) *out);
+    std::string line;
 
     std::vector<std::vector<int>> adj;
     std::vector<int> adapters;
     int max_jolt = 0;
 
-    std::string line;
     while (getline(file, line))
     {   
         int jolt = std::stoi(line);
@@ -86,6 +89,4 @@ int main(int arg, char* argv[])
         dp_paths[i] = paths;
     }
     uint64_t p2 = dp_paths[0];
-    std::cout << p1 << "\n";
-    std::cout << p2 << "\n";
 }  
