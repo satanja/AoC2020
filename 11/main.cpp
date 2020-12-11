@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <utility>
+#include <array>
 #include "stefan.h"
 
 int occupied(int x, int y, const std::array<std::array<char, 100>, 100>& state)
