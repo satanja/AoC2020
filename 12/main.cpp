@@ -4,38 +4,17 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <chrono>
+#include <array>
 
-inline int map_char(const char c)
+inline int map_char(
+    const std::array<char, 7>& index,
+    const std::array<char, 7>& map,
+    const char c)
 {
-    if (c == 'E')
-    {
-        return 0;
-    }
-    if (c == 'S')
-    {
-        return 1;
-    }
-    if (c == 'W')
-    {
-        return 2;
-    }
-    if (c == 'N')
-    {
-        return 3;
-    }
-    if (c == 'F')
-    {
-        return 'F';
-    }
-    if (c == 'L')
-    {
-        return 'L';
-    }
-    if (c == 'R')
-    {
-        return 'R';
-    }
-    return 'z' + 'e' + 'r' + 'o'; 
+    auto ptr = std::lower_bound(index.begin(), index.end(), c); // binary search jonges!
+    int i = ptr - index.begin();
+    return map[i];
 }
 
 inline int stoi(std::string s, int offset)
@@ -52,6 +31,8 @@ inline int stoi(std::string s, int offset)
 int main(int arg, char *argv[])
 {
     std::ifstream file{std::string(argv[1])};
+    auto begin = std::chrono::high_resolution_clock::now();
+
     std::pair<int, int> directions[] = {
         {1, 0},  // E
         {0, -1}, // S
@@ -64,9 +45,11 @@ int main(int arg, char *argv[])
 
     std::string l;
     std::vector<std::pair<char, int>> instructions;
+    std::array<char, 7> index { 'E', 'F', 'L', 'N', 'R', 'S', 'W' };
+    std::array<char, 7> map { 0, 'F', 'L', 3, 'R', 1, 2 };
     while (getline(file, l))
     {
-        instructions.emplace_back(map_char(l.at(0)), stoi(l, 1));
+        instructions.emplace_back(map_char(index, map, l.at(0)), stoi(l, 1));
     }
 
     for (const std::pair<char, int>& p : instructions)
@@ -150,8 +133,11 @@ int main(int arg, char *argv[])
         }
     }
 
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration<double, std::micro>(end - begin);
     std::cout << std::abs(x) + std::abs(y) << "\n";
     std::cout << std::abs(x2) + std::abs(y2) << "\n";
+    std::cout << duration.count() << "us\n";
 
     return 0;
 }
