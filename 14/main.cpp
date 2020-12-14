@@ -6,6 +6,12 @@
 #include <string>
 #include <iostream>
 
+#if WIN32
+    #define SHIFT(k) 1i64 << k
+#else 
+    #define SHIFT(k) 1 << k
+#endif
+
 void bruteforce(
     std::unordered_map<int64_t, int64_t>& memory,
     const std::array<char, 36>& mask,
@@ -21,8 +27,8 @@ void bruteforce(
     }
     else
     {
-        int64_t addr1 = addr | (1i64 << mask[index]);
-        int64_t addr2 = addr & ~(1i64 << mask[index]);
+        int64_t addr1 = addr | SHIFT(mask[index]);
+        int64_t addr2 = addr & ~(SHIFT(mask[index]));
         bruteforce(memory, mask, addr1, val, index + 1, max);
         bruteforce(memory, mask, addr2, val, index + 1, max);
     }
@@ -60,7 +66,7 @@ int main(int arg, char* argv[])
                 if (c == 'X' - '0') continue;
                 if (c)
                 {
-                    addr2 |= (1i64 << j);
+                    addr2 |= SHIFT(j);
                 }
             }
             bruteforce(memory2, mask2, addr2, val, 0, max);
@@ -72,11 +78,11 @@ int main(int arg, char* argv[])
                 if (c == 'X' - '0') continue;
                 if (c)
                 {
-                    val |= (1i64 << j);
+                    val |= SHIFT(j);
                 }
                 else 
                 {
-                    val &= ~(1i64 << j);
+                    val &= ~(SHIFT(j));
                 }
             }
 
