@@ -6,10 +6,10 @@
 #include <string>
 #include <iostream>
 
-#if WIN32
-    #define SHIFT(k) 1i64 << k
-#else 
+#ifdef __GNUC__
     #define SHIFT(k) 1 << k
+#else 
+    #define SHIFT(k) 1i64 << k
 #endif
 
 void bruteforce(
