@@ -4,7 +4,7 @@ project(advent)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(advent 14/main.cpp)  
+add_executable(advent 15/main.cpp)  
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
