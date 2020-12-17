@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <map>
+#include <vector>
 
 #define SIZE 20
 
